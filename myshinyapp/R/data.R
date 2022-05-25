@@ -36,3 +36,4 @@ populate_table <- function(bucket, object){
   # Close DB connection
   DBI::dbDisconnect(conn)
 }
+
