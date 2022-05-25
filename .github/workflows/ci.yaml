@@ -16,7 +16,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
-          images: inseefrlab/shiny-app-template
+          images: odysseu/shiny-app-template
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -33,9 +33,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            ${{ steps.docker_meta.outputs.tags }}
-            ${{ github.ref == 'refs/heads/main' && 'inseefrlab/shiny-app-template:latest' || '' }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
